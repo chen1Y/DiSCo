@@ -1,36 +1,4 @@
-# Learning Attribute-driven Disentangled Representations for Interactive Fashion Retrieval
-
-This code implements the Attribute-Driven Disentangled Encoder (ADDE) as well as the model for
-attribute manipulation (ADDE-M) as described in the original manuscript:
-
-> Yuxin Hou, Eleonora Vig, Michael Donoser, and Loris Bazzani. [Learning Attribute-driven Disentangled Representations for Interactive Fashion Retrieval](https://www.amazon.science/publications/learning-attribute-driven-disentangled-representations-for-interactive-fashion-retrieval). ICCV 2021.
-
-If you find this code useful in your research, please cite the following:
-
-```
-@inproceedings{hou2021disentanglement,
-    title={Learning Attribute-driven Disentangled Representations for Interactive Fashion Retrieval},
-    author={Hou, Yuxin and Vig, Eleonora and Donoser, Michael and Bazzani, Loris},
-    booktitle = {The International Conference on Computer Vision (ICCV)},
-    month = {October},
-    year = {2021}
-}
-```
-
-Note: the implementation of this work was mainly done by Yuxin Hou during her internship at Amazon.
-
-## Before Cloning: git-lfs
-
-Install [git-lfs](https://git-lfs.github.com/) before cloning by following the instructions [here](https://github.com/git-lfs/git-lfs/wiki/Installation).
-This repository uses git-lfs to store model checkpoint and split files.
-
-Once installed, the files in git-lfs will be automatically downloaded when cloning the repository with:
-```
-git clone https://github.com/amzn/fashion-attribute-disentanglement.git
-```
-
-These files can optionally be ignored (since the models are ~500MB) by using `git lfs install --skip-smudge` before cloning the repository, and can be downloaded at any time using `git lfs pull`.
-
+# DiSCo: Disentangled Attribute Manipulation Retrieval via Semantic Reconstruction and Consistency Regularization
 
 ## Installation 
 
@@ -38,19 +6,16 @@ Follow the [instructions](https://www.anaconda.com/products/individual) to insta
 You can use python venv if preferred.
 
 ```bash
-conda create -n adde-m python=3.7
-conda activate adde-m
-conda install --file requirements.txt
-pip install faiss-cpu==1.6.3 torchvision==0.5.0
+conda create -n disco python=3.9.16
+conda activate disco
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
+pip install -r requirements.txt
 ```
 
 ## Data Preparation
 We use the following publicly-available datasets that you will need to download from the original sources:
 + **Shopping100k**: contact [the author of the dataset](https://sites.google.com/view/kenanemirak/home) to get access to the images.
 + **DeepFashion**: download images and labels for the category and attribute prediction benchmark from [the dataset website](http://mmlab.ie.cuhk.edu.hk/projects/DeepFashion/AttributePrediction.html).
-
-In the sub-folders `models` and `splits`, you should be able to find all the material needed to run training and evaluation.
-Note: this folders were downloaded via git-lfs; if they are not present, please makes sure that git-lfs is installed **before cloning** the git repository. 
 
 
 ## Training
@@ -153,11 +118,3 @@ the i-th line in `indfull_test.txt` is the indicate vector consists of -1, 0, 1,
 and the i-th line in `gt_test.txt` is the one-hot label vectors of the target attributes.
 
 
-## Security
-
-See [CONTRIBUTING](https://github.com/amzn/fashion-attribute-disentanglement/blob/main/CONTRIBUTING.md#security-issue-notifications) for more information.
-
-
-## License
-
-This library is licensed under the CC-BY-NC-4.0 License.
